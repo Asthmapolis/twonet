@@ -1,6 +1,6 @@
 #TwoNetAPI
 
-An npm module that implements the Qualcomm Life 2net API.
+An npm module that implements the Qualcomm Life 2net API. This implementation currently supports revision V of the API.
 
 ## Methods
 
@@ -36,7 +36,7 @@ A list of available CLI commands:
 ## Usage
 
 ```js
-    var api = new TwoNetAPI();
+    var api = new TwoNetAPI(YOUR_CUST_ID, YOUR_AUTH_KEY, ENV);
     api.getHubs(function(status, hubs) {
         if( status < 0 ) {
             console.log('Failed api.getHubs() : ' + status);
