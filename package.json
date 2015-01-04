@@ -1,0 +1,49 @@
+{
+    "name" : "twonet",
+    "private" : false,
+    "version" : "0.1.0",
+    "author" : "Greg Tracy <gtracy@gmail.com> (http://propellerhealth.com/)",
+
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/Asthmapolis/twonet.git"
+    },
+
+    "main" : "lib/twonet.js",
+
+    "scripts" : {
+        "start"  : "node bin/index.js",
+        "help"   : "node bin/index.js",
+        "fetch"  : "node bin/fetch.js"
+    },
+
+    "description" : "A Node implementation of the Qualcomm Life 2net API.",
+    "keywords" : [
+        "2net",
+        "hub",
+        "qualcomm",
+        "qualcomm life",
+        "digital health"
+    ],
+    "license" : "MIT",
+
+    "dependencies": {
+
+        "debug"      : "2.1.0",
+        "underscore" : "1.7.0",
+        "xml2js"     : "0.4.0",
+        "logme"      : "0.3.8",
+        "eyes"       : "*"
+
+    },
+
+    "bugs": {
+        "url": "https://github.com/Asthmapolis/twonet/issues"
+    }
+
+}
+
+{
+  "author": "Brent Ertz <brent.ertz@gmail.com> (http://brentertz.com/)",
+  "license": "BSD-2-Clause",
+}
