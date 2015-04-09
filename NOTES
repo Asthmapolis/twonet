@@ -1,13 +1,7 @@
 
-- Document methods in the repo Wiki
-
-
-========
-Complete
-========
-
 - Create the package
 - Swap out the SPP code with the package
-- Create a Github repo
 - Add usage example to the README
+- Create a Github repo
 - Add command line tool to fetch hub details
+- Document methods in the repo Wiki
