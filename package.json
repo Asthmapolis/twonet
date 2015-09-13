@@ -1,7 +1,7 @@
  {
     "name" : "twonet",
     "private" : false,
-    "version" : "0.2.7",
+    "version" : "0.3.0",
     "author" : "Greg Tracy <gtracy@gmail.com> (http://propellerhealth.com/)",
 
     "repository": {
@@ -29,10 +29,12 @@
 
     "dependencies": {
 
+        "async"      : "1.4.0",
         "debug"      : "2.1.0",
-        "underscore" : "1.7.0",
+        "logme"      : "0.3.8",
         "xml2js"     : "0.4.0",
-        "logme"      : "0.3.8"
+        "request"    : "2.61.0",
+        "underscore" : "1.7.0"
 
     },
 
