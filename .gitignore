@@ -2,3 +2,4 @@ node_modules/
 lib/config-ph.js
 examples/constants-ph.js
 examples/reminders.js
+npm-debug.log
