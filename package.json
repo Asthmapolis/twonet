@@ -1,7 +1,7 @@
  {
     "name" : "twonet",
     "private" : false,
-    "version" : "0.3.0",
+    "version" : "0.3.2",
     "author" : "Greg Tracy <gtracy@gmail.com> (http://propellerhealth.com/)",
 
     "repository": {
@@ -12,9 +12,8 @@
     "main" : "lib/twonet.js",
 
     "scripts" : {
-        "start"  : "node bin/index.js",
-        "help"   : "node bin/index.js",
-        "fetch"  : "node bin/fetch.js"
+        "deactivate" : "node bin/deactivate.js",
+        "register"   : "node bin/register-device.js"
     },
 
     "description" : "A Node implementation of the Qualcomm Life 2net API.",
