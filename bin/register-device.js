@@ -11,11 +11,10 @@ var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, env);
 
 var SENSOR_TYPE = 'BTLE';
 var device_list = {
-	'fixme-with-device-model-name' : ['mac-address-here'],
-	'another-model-name' : []
+	'STINGRAY' : ['F8:FE:5C:E0:00:6C']
 };
 
-console.log('Register a list of devices ' + env + '\n');
+console.log('Register a list of devices in ' + env + '\n');
 var list_count = 0;
 _.keys(device_list).forEach(function(device_type) {
 	console.log('registering ' + device_type + 's...');
