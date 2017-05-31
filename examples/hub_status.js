@@ -1,10 +1,13 @@
-var c = require('./constants');
+var async = require('async');
 var TwoNetAPI = require('../lib/twonet');
+var config = require('../lib/config');
 
-
-var hub_id = 'QUALC00100000000';
-var config = c.sandbox;
-var config_env = 'sandbox';
+var hub_id = 'QUALC00100011809';
+// default to production environment
+var env = 'production';
+if( process.argv[2] == 'sandbox' ) {
+    env = 'sandbox';
+}
 
 var timeCheck = function(list) {
     if( list && list.length > 0 ) {
@@ -13,14 +16,14 @@ var timeCheck = function(list) {
         return undefined;
     }
 };
-var api = new TwoNetAPI(c.customer_id, config.auth_key, config_env);
+var api = new TwoNetAPI(config.customer_id, 
+                        config[env].auth_key, 
+                        env);
 api.getHub(hub_id, function(err, details) {
     if( err < 0 ) {
         console.log('------- SKIP --------');
         return;
     }
-    //console.dir(details);
-
     var hub = details.HubDetails;
     var db_details = {
         date   : new Date(),

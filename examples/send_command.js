@@ -1,4 +1,4 @@
-var c = require('./constants');
+var config = require('../lib/config');
 var TwoNetAPI = require('../lib/twonet');
 
 var hub_id = 'QUALC00100000xxx';
@@ -24,7 +24,7 @@ commands.forEach(function(c,c_index) {
 var value = buf.toString('base64');
 console.log(value);
 
-var api = new TwoNetAPI(c.customer_id, c.sandbox.auth_key, environment);
+var api = new TwoNetAPI(config.customer_id,config[env].auth_key,env);
 api.sendDeviceCommand(hub_id, mac, sensor_type, value, function(status, result) {
 	console.log('status : ' + status);
 	console.dir(result);
