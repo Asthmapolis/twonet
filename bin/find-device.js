@@ -13,7 +13,7 @@ if( process.argv.length < 4 ) {
 	console.log('Whoops. You need to pass in the sensor id and sensor type (ie :  B2:22:33 BTLE)');
 	process.exit(0);
 } else {
-	sensor_id = 'F8:FE:5C:'+process.argv[2];
+	sensor_id = process.argv[2];
 	sensor_type = process.argv[3];
 }
 

@@ -8,17 +8,17 @@ var config = require('../lib/config');
 //   <hub-file> is a text file containing hub IDs on each line
 //   <env> optional environment declaration. defaults to production
 //
-function print_usage() {
+function kill() {
 	console.log("\nUsage : \n");
 	console.log("node bin/deactivate.js <hub-file> <env>");
 	console.log("    <hub-file> is a text file containing hub IDs on each line");
 	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
 	console.log("\n");
+	process.exit(0);
 }
 
 if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
-	print_usage();
-	process.exit(1);
+	kill();
 } else {
 	// default to production environment
 	var env = 'production';
@@ -28,8 +28,7 @@ if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 
 			env = 'sandbox';
 		} else if( argv_env !== 'production' ) {
 			console.log("\nHmph. I don't recognize that environment, " + argv_env);
-			print_usage();
-			process.exit(1);
+			kill();
 		}
 	}
 	var filename = process.argv[2];
@@ -41,8 +40,7 @@ if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 
     	} else {
     		console.dir(exception);
     	}
-    	print_usage();
-    	process.exit(1);
+    	kill();
     }
 }
 

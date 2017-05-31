@@ -28,7 +28,9 @@ An npm module that implements the Qualcomm Life 2net API. This implementation cu
 	npm install twonet
 ```
 
-## Running
+## Running utility scripts
+The package provides several scripts for common tasks used with a fleet of hubs. 
+
 A list of available CLI commands:
 ```shell
 	npm run help

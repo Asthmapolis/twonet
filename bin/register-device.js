@@ -3,9 +3,9 @@ var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
 
 // default to sandbox environment
-var env = 'sandbox';
-if( process.argv[2] == 'production' ) {
-	env = 'production';
+var env = 'production';
+if( process.argv[2] == 'sandbox' ) {
+	env = 'sandbox';
 }
 var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, env);
 
