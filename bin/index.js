@@ -6,7 +6,7 @@ console.log("\t(1) Deactivate a list of hubs :");
 console.log("\t  npm run deactivate <filename> <env>");
 console.log("\n");
 console.log("\t(2) Find a specific sensor device : ");
-console.log("\t  npm run find <sensor-id> <device-model>");
+console.log("\t  npm run find <sensor-id> <sensor-type> <env>");
 console.log("\n");
 console.log("\t(3) Provision a list of hubs : ");
 console.log("\t  npm run provision <env>");
