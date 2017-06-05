@@ -3,18 +3,39 @@ var _ = require('underscore');
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
 
-// default to sandbox environment
-var env = 'production';
-if( process.argv[2] == 'sandbox' ) {
-	env = 'sandbox';
-}
-var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, env);
 
 var SENSOR_TYPE = 'BTLE';
 var hub_id = 'QUALC00100000604';
 var device_list = {
 	'STINGRAY' : ['F8:FE:5C:E0:00:6C']
 };
+
+function kill() {
+	console.log("\nUsage : \n");
+	console.log("node bin/provision.js <hub-id> <env>");
+	console.log("    <hub-id> ID of the hub you would like to provision");
+	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
+	console.log("\n");
+	process.exit(0);
+}
+
+if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
+	kill();
+} else {
+	// default to production environment
+	var env = 'production';
+	if( process.argv.length === 4 ) {
+		var argv_env = process.argv[3];
+		if( argv_env === 'sandbox' ) {
+			env = 'sandbox';
+		} else if( argv_env !== 'production' ) {
+			console.log("\nHmph. I don't recognize that environment, " + argv_env);
+			kill();
+		}
+	}
+	var hub_id = process.argv[2];
+}
+var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, env);
 
 // convenience function to add a sensor to a hub
 //
@@ -62,8 +83,8 @@ var provision_hub = function(hub_id, macAddr, sensor_model, callback) {
 	
 };
 
+console.log("\nProvisioning hub " + hub_id + " in " + env);
 
-console.log('Register a list of devices in ' + env + '\n');
 var list_count = 0;
 _.keys(device_list).forEach(function(device_type) {
 	device_list[device_type].forEach(function(mac) {
