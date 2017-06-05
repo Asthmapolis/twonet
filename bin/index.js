@@ -16,7 +16,7 @@ console.log("\t(4) Register a specific device to a hub");
 console.log("\t  npm run register <env>");
 console.log("\n");
 console.log("\t(5) Send a command to a device on a hub");
-console.log("\t  npm run command");
+console.log("\t  npm run command <hub-id> <mac> <env>");
 console.log("\n");
 console.log("\t(6) Get the status of a list of hubs");
 console.log("\t  npm run status");

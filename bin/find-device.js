@@ -3,7 +3,7 @@ var TwoNetAPI = require('../lib/twonet');
 
 function kill() {
 	console.log("\nUsage : \n");
-	console.log("node bin/deactivate.js <sensor-id> <sensor-type> <env>");
+	console.log("npm run find <sensor-id> <sensor-type> <env>");
 	console.log("    <sensor-id> colon separated sensor ID you're searching for");
 	console.log("    <sensor-type> sensor type (usually 'BTLE')");
 	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");

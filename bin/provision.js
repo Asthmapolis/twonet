@@ -12,7 +12,7 @@ var device_list = {
 
 function kill() {
 	console.log("\nUsage : \n");
-	console.log("node bin/provision.js <hub-id> <env>");
+	console.log("npm run provision <hub-id> <env>");
 	console.log("    <hub-id> ID of the hub you would like to provision");
 	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
 	console.log("\n");

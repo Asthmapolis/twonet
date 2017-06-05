@@ -7,7 +7,7 @@ var config = require('../lib/config');
 
 function kill() {
 	console.log("\nUsage : \n");
-	console.log("node bin/deactivate.js <hub-file> <env>");
+	console.log("npm run deactivate <hub-file> <env>");
 	console.log("    <hub-file> is a text file containing hub IDs on each line");
 	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
 	console.log("\n");
