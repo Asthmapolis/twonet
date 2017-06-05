@@ -1,13 +1,10 @@
 var async = require('async');
 var fs = require('fs');
+var prompt = require('prompt');
+
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
 
-//
-// Command use : node bin/deactivate.js <hub-file> <env>
-//   <hub-file> is a text file containing hub IDs on each line
-//   <env> optional environment declaration. defaults to production
-//
 function kill() {
 	console.log("\nUsage : \n");
 	console.log("node bin/deactivate.js <hub-file> <env>");
@@ -45,21 +42,42 @@ if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 
 }
 
 console.log('\n*** You are about to deactivate ' + hub_list.length + ' hubs *** ');
-console.log('\nAre you sure you want to do this? Y/n  ');
 
-var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, env);
-async.eachSeries(hub_list,function(hub_id,cb) {
-	console.log('\t'+hub_id);
-	twoNetApi.deactivateHub(hub_id, function(status, result) {
-		if( status < 0 ) {
-			console.log('ERROR : Failed to de-activate ' + hub_id);
-			console.dir(result);
-		}
-		cb(null);
-	});
-},function(err) {
-	console.log('\ndone.');
-	process.exit(0);
-});
+prompt.start();
+prompt.message = '';
+prompt.delimiter = '';
+prompt.get({
+    properties: {
+        
+        // setup the dialog
+        confirm: {
+            // allow yes, no, y, n, YES, NO, Y, N as answer
+            pattern: /^(yes|no|y|n)$/gi,
+            description: 'Are you sure you want to *deactivate* these hubs?',
+            message: 'Type yes/no',
+            required: true,
+            default: 'no'
+        }
+    }
+
+}, function(err, result) {
+	var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, env);
+		async.eachSeries(hub_list,function(hub_id,cb) {
+			console.log('\t'+hub_id);
+			twoNetApi.deactivateHub(hub_id, function(status, result) {
+				if( status < 0 ) {
+					console.log('ERROR : Failed to de-activate ' + hub_id);
+					console.dir(result);
+				}
+				cb(null);
+			});
+		},function(err) {
+			console.log('\ndone.');
+			process.exit(0);
+		});
+	}
+);
+
+
 
 

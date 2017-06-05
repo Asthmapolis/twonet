@@ -1,51 +1,41 @@
- {
-    "name" : "twonet",
-    "private" : false,
-    "version" : "1.2.0",
-    "author" : "Greg Tracy <gtracy@gmail.com> (https://propellerhealth.com/)",
-
+{
+    "name": "twonet",
+    "private": false,
+    "version": "1.2.0",
+    "author": "Greg Tracy <gtracy@gmail.com> (https://propellerhealth.com/)",
     "repository": {
         "type": "git",
         "url": "git://github.com/Asthmapolis/twonet.git"
     },
-
-    "main" : "lib/twonet.js",
-
-    "scripts" : {
-        "help" : "node bin/index.js",
-
-        "deactivate" : "node bin/deactivate.js",
-        "find"       : "node bin/find-device.js",
-        "provision"  : "node bin/provision.js",
-        "register"   : "node bin/register-device.js",
-        "command"    : "node bin/send-command.js",
-        "status"     : "node bin/status.js"
+    "main": "lib/twonet.js",
+    "scripts": {
+        "help": "node bin/index.js",
+        "deactivate": "node bin/deactivate.js",
+        "find": "node bin/find-device.js",
+        "provision": "node bin/provision.js",
+        "register": "node bin/register-device.js",
+        "command": "node bin/send-command.js",
+        "status": "node bin/status.js"
     },
-
-    "description" : "A Node implementation of the Qualcomm Life 2net API.",
-
-    "keywords" : [
+    "description": "A Node implementation of the Qualcomm Life 2net API.",
+    "keywords": [
         "2net",
         "hub",
         "qualcomm",
         "qualcomm life",
         "digital health"
     ],
-    "license" : "MIT",
-
+    "license": "MIT",
     "dependencies": {
-
-        "async"      : "2.3.0",
-        "debug"      : "2.1.0",
-        "logme"      : "0.3.8",
-        "xml2js"     : "0.4.0",
-        "request"    : "2.61.0",
-        "underscore" : "1.7.0"
-
+        "async": "2.3.0",
+        "debug": "2.1.0",
+        "logme": "0.3.8",
+        "prompt": "^1.0.0",
+        "request": "2.61.0",
+        "underscore": "1.7.0",
+        "xml2js": "0.4.0"
     },
-
     "bugs": {
         "url": "https://github.com/Asthmapolis/twonet/issues"
     }
-
 }
