@@ -2,11 +2,31 @@ var async = require('async');
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
 
-var hub_id = 'QUALC00100011809';
-// default to production environment
-var env = 'production';
-if( process.argv[2] == 'sandbox' ) {
-    env = 'sandbox';
+
+function kill() {
+    console.log("\nUsage : \n");
+    console.log("npm run command <hub-id> <env>");
+    console.log("    <hub-id> ID of the hub you would like to get status of");
+    console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
+    console.log("\n");
+    process.exit(0);
+}
+
+if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
+    kill();
+} else {
+    // default to production environment
+    var env = 'production';
+    if( process.argv.length === 4 ) {
+        var argv_env = process.argv[3];
+        if( argv_env === 'sandbox' ) {
+            env = 'sandbox';
+        } else if( argv_env !== 'production' ) {
+            console.log("\nHmph. I don't recognize that environment, " + argv_env);
+            kill();
+        }
+    }
+    var hub_id = process.argv[2];
 }
 
 var timeCheck = function(list) {
@@ -56,11 +76,8 @@ api.getHub(hub_id, function(err, details) {
     if( device_details && device_details.Device && device_details.Device.length > 0 ) {
         device_details.Device.forEach(function(device) {
             db_details.dev_count++;
-            db_details.devices.configured_devices.push({
-                device_id : device.deviceAddress[0],
-                device_type : device.airInterfaceType[0]
-            });
+            db_details.devices.configured_devices.push(device.deviceAddress[0] + ' :: ' + device.airInterfaceType[0]);
         });
     }
-    console.dir(db_details.hub_id);
+    console.dir(db_details);
 });
