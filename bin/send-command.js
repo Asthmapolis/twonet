@@ -11,9 +11,10 @@ var commands = [
 
 function kill() {
 	console.log("\nUsage : \n");
-	console.log("npm run command <hub-id> <mac> <env>");
+	console.log("npm run command <hub-id> <mac> <region> <env>");
 	console.log("    <hub-id> ID of the hub you would like to send a command to");
 	console.log("    <mac> MAC of the sensor you are targeting");
+    console.log("    <region> region the hub is used in");
 	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
 	console.log("\n");
 	process.exit(0);
@@ -26,13 +27,13 @@ var mac = 'fixme';
 var sensor_type = 'BTLE';
 //
 
-if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
+if( process.argv.length < 5 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
 	kill();
 } else {
 	// default to production environment
 	var env = 'production';
-	if( process.argv.length === 5 ) {
-		var argv_env = process.argv[4];
+	if( process.argv.length === 6 ) {
+		var argv_env = process.argv[5];
 		if( argv_env === 'sandbox' ) {
 			env = 'sandbox';
 		} else if( argv_env !== 'production' ) {
@@ -40,8 +41,15 @@ if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 
 			kill();
 		}
 	}
+
+    if (!config.hasOwnProperty(process.argv[4])) {
+        console.log("\nHmph. I don't recognize that region, " + process.argv[4]);
+        kill();
+    }
+
 	hub_id = process.argv[2];
 	mac = process.argv[3];
+	var region = process.argv[4];
 }
 
 console.log('\nSending command to ' + mac + '@' + hub_id + '...');
@@ -59,7 +67,7 @@ commands.forEach(function(c,c_index) {
 var value = buf.toString('base64');
 console.log(value);
 
-var api = new TwoNetAPI(config.customer_id,config[env].auth_key,env);
+var api = new TwoNetAPI(config.customer_id, config[env].auth_key, region, env);
 api.sendDeviceCommand(hub_id, mac, sensor_type, value, function(status, result) {
 	console.log('status : ' + status);
 	console.dir(result);
