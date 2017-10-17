@@ -5,7 +5,7 @@ var config = require('../lib/config');
 
 function kill() {
     console.log("\nUsage : \n");
-    console.log("npm run command <hub-id> <env>");
+    console.log("npm run status <hub-id> <env>");
     console.log("    <hub-id> ID of the hub you would like to get status of");
     console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
     console.log("\n");
