@@ -3,21 +3,22 @@ var TwoNetAPI = require('../lib/twonet');
 
 function kill() {
 	console.log("\nUsage : \n");
-	console.log("npm run find <sensor-id> <sensor-type> <env>");
+	console.log("npm run find <sensor-id> <sensor-type> <region> <env>");
 	console.log("    <sensor-id> colon separated sensor ID you're searching for");
 	console.log("    <sensor-type> sensor type (usually 'BTLE')");
+    console.log("    <region> region the hub is used in");
 	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
 	console.log("\n");
 	process.exit(0);
 }
 
-if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
+if( process.argv.length < 5 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
 	kill();
 } else {
 	// default to production environment
 	var env = 'production';
-	if( process.argv.length === 5 ) {
-		var argv_env = process.argv[4];
+	if( process.argv.length === 6 ) {
+		var argv_env = process.argv[5];
 		if( argv_env === 'sandbox' ) {
 			env = 'sandbox';
 		} else if( argv_env !== 'production' ) {
@@ -25,13 +26,20 @@ if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 
 			kill();
 		}
 	}
+
+    if (!config.hasOwnProperty(process.argv[4])) {
+        console.log("\nHmph. I don't recognize that region, " + process.argv[4]);
+        kill();
+    }
+
 	var sensor_id = process.argv[2];
 	var sensor_type = process.argv[3];
+    var region = process.argv[4];
 }
 
 console.log("\nSearching for, " + sensor_id + "/" + sensor_type);
 
-var api = new TwoNetAPI(config.customer_id,config[env].auth_key,env);
+var api = new TwoNetAPI(config.customer_id,config[env].auth_key,region, env);
 api.getDevice(sensor_id, sensor_type, function(status, result) {
 	console.log('status : ' + status);
 	console.dir(result);

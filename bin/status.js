@@ -1,24 +1,23 @@
-var async = require('async');
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
 
-
 function kill() {
     console.log("\nUsage : \n");
-    console.log("npm run status <hub-id> <env>");
+    console.log("npm run status <hub-id> <region> <env>");
     console.log("    <hub-id> ID of the hub you would like to get status of");
+    console.log("    <region> region the hub is used in");
     console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
     console.log("\n");
     process.exit(0);
 }
 
-if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
+if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
     kill();
 } else {
     // default to production environment
     var env = 'production';
-    if( process.argv.length === 4 ) {
-        var argv_env = process.argv[3];
+    if( process.argv.length === 5 ) {
+        var argv_env = process.argv[4];
         if( argv_env === 'sandbox' ) {
             env = 'sandbox';
         } else if( argv_env !== 'production' ) {
@@ -26,7 +25,14 @@ if( process.argv.length < 3 || process.argv[2].toLowerCase().indexOf('help') >= 
             kill();
         }
     }
+
+    if (!config.hasOwnProperty(process.argv[3])) {
+        console.log("\nHmph. I don't recognize that region, " + process.argv[3]);
+        kill();
+    }
+
     var hub_id = process.argv[2];
+    var region = process.argv[3];
 }
 
 var timeCheck = function(list) {
@@ -37,7 +43,8 @@ var timeCheck = function(list) {
     }
 };
 var api = new TwoNetAPI(config.customer_id, 
-                        config[env].auth_key, 
+                        config[env].auth_key,
+                        region,
                         env);
 api.getHub(hub_id, function(err, details) {
     if( err < 0 ) {
