@@ -69,7 +69,7 @@ prompt.get({
     }
 
 }, function(err, result) {
-	var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, region, env);
+	var twoNetApi = new TwoNetAPI(config[region][env].customer_id, config[region][env].auth_key, region, env);
 		async.eachSeries(hub_list,function(hub_id,cb) {
 			console.log('\t'+hub_id);
 			twoNetApi.deactivateHub(hub_id, function(status, result) {

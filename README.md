@@ -29,7 +29,9 @@ An npm module that implements the Qualcomm Life 2net API. This implementation cu
 ```
 
 ## Running utility scripts
-The package provides several scripts for common tasks used with a fleet of hubs. 
+The package provides several scripts for common tasks used with a fleet of hubs.
+
+Before using the CLI, add your customer_id and auth_key to the lib/config.js file.
 
 A list of available CLI commands:
 ```shell
@@ -39,7 +41,7 @@ A list of available CLI commands:
 ## Usage
 
 ```js
-    var api = new TwoNetAPI(YOUR_CUST_ID, YOUR_AUTH_KEY, ENV);
+    var api = new TwoNetAPI(YOUR_CUST_ID, YOUR_AUTH_KEY, REGION, ENV);
     api.getHubs(function(status, hubs) {
         if( status < 0 ) {
             console.log('Failed api.getHubs() : ' + status);
