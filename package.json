@@ -1,7 +1,7 @@
 {
     "name": "twonet",
     "private": false,
-    "version": "1.2.0",
+    "version": "2.0.0",
     "author": "Greg Tracy <gtracy@gmail.com> (https://propellerhealth.com/)",
     "repository": {
         "type": "git",
