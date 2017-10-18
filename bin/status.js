@@ -42,8 +42,8 @@ var timeCheck = function(list) {
         return undefined;
     }
 };
-var api = new TwoNetAPI(config.customer_id, 
-                        config.auth_key,
+var api = new TwoNetAPI(config[region][env].customer_id,
+                        config[region][env].auth_key,
                         region,
                         env);
 api.getHub(hub_id, function(err, details) {

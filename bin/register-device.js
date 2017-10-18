@@ -40,7 +40,7 @@ if (!config.hasOwnProperty(process.argv[2])) {
 
 var region = process.argv[2];
 
-var twoNetApi = new TwoNetAPI(config.customer_id, config.auth_key, region, env);
+var twoNetApi = new TwoNetAPI(config[region][env].customer_id, config[region][env].auth_key, region, env);
 
 console.log('Register a list of devices in ' + env + '\n');
 var list_count = 0;
