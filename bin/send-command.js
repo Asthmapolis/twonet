@@ -67,7 +67,7 @@ commands.forEach(function(c,c_index) {
 var value = buf.toString('base64');
 console.log(value);
 
-var api = new TwoNetAPI(config.customer_id, config[env].auth_key, region, env);
+var api = new TwoNetAPI(config.customer_id, config.auth_key, region, env);
 api.sendDeviceCommand(hub_id, mac, sensor_type, value, function(status, result) {
 	console.log('status : ' + status);
 	console.dir(result);

@@ -39,7 +39,7 @@ if( process.argv.length < 5 || process.argv[2].toLowerCase().indexOf('help') >= 
 
 console.log("\nSearching for, " + sensor_id + "/" + sensor_type);
 
-var api = new TwoNetAPI(config.customer_id,config[env].auth_key,region, env);
+var api = new TwoNetAPI(config.customer_id, config.auth_key, region, env);
 api.getDevice(sensor_id, sensor_type, function(status, result) {
 	console.log('status : ' + status);
 	console.dir(result);

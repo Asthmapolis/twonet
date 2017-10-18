@@ -40,10 +40,10 @@ if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 
         kill();
     }
 
-	var hub_id = process.argv[2];
+	hub_id = process.argv[2];
 	var region = process.argv[3];
 }
-var twoNetApi = new TwoNetAPI(config.customer_id, config[env].auth_key, region, env);
+var twoNetApi = new TwoNetAPI(config.customer_id, config.auth_key, region, env);
 
 // convenience function to add a sensor to a hub
 //
