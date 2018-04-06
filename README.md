@@ -1,6 +1,6 @@
 # TwoNetAPI
 
-An npm module that implements the Qualcomm Life 2net API. This implementation currently supports revision V of the API.
+An npm module that implements the Qualcomm Life 2net API. This implementation currently supports revision Y of the API.
 
 ## Methods
 
