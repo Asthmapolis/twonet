@@ -1,3 +1,5 @@
+'use strict';
+
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
 
@@ -59,12 +61,12 @@ api.getHub(hub_id, function(err, details) {
         dev_count : 0
     };
 
-    db_details.software_id = hub.currentSoftwareId[0];
-    db_details.firmware_id = hub.currentFirmwareId[0];
-    db_details.software_version = hub.currentSoftwareVersion[0];
-    db_details.firmware_version = hub.currentFirmwareVersion[0];
-    db_details.app_version = hub.app_vers[0];
-    db_details.model_name = hub.modelName[0];
+    db_details.software_id = (hub.currentSoftwareId && hub.currentSoftwareId[0]) ? hub.currentSoftwareId[0] : undefined;
+    db_details.firmware_id = (hub.currentFirmwareId && hub.currentFirmwareId[0]) ? hub.currentFirmwareId[0] : undefined;
+    db_details.software_version = (hub.currentSoftwareVersion && hub.currentSoftwareVersion[0]) ? hub.currentSoftwareVersion[0] : undefined;
+    db_details.firmware_version = (hub.currentFirmwareVersion && hub.currentFirmwareVersion[0]) ? hub.currentFirmwareVersion[0] : undefined;
+    db_details.app_version = (hub.app_vers && hub.app_vers[0]) ? hub.app_vers[0] : undefined;
+    db_details.model_name = (hub.modelName && hub.modelName[0]) ? hub.modelName[0] : undefined;
     db_details.manufacture_date = timeCheck(hub.dateOfManufacture);
     db_details.activation_date = timeCheck(hub.activationTimestamp);
     db_details.last_communication_date = timeCheck(hub.lastCommTimestamp);
