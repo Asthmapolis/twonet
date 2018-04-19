@@ -2,6 +2,7 @@
 
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
+var localConfig = require('./local-cli-config');
 
 function kill() {
     console.log("\nUsage : \n");
@@ -44,8 +45,8 @@ var timeCheck = function(list) {
         return undefined;
     }
 };
-var api = new TwoNetAPI(config[region][env].customer_id,
-                        config[region][env].auth_key,
+var api = new TwoNetAPI(localConfig[region][env].customer_id,
+                        localConfig[region][env].auth_key,
                         region,
                         env);
 api.getHub(hub_id, function(err, details) {

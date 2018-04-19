@@ -1,4 +1,5 @@
 var config = require('../lib/config');
+var localConfig = require('./local-cli-config');
 var TwoNetAPI = require('../lib/twonet');
 
 //
@@ -67,7 +68,7 @@ commands.forEach(function(c,c_index) {
 var value = buf.toString('base64');
 console.log(value);
 
-var api = new TwoNetAPI(config[region][env].customer_id, config[region][env].auth_key, region, env);
+var api = new TwoNetAPI(localConfig[region][env].customer_id, localConfig[region][env].auth_key, region, env);
 api.sendDeviceCommand(hub_id, mac, sensor_type, value, function(status, result) {
 	console.log('status : ' + status);
 	console.dir(result);

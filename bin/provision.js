@@ -2,6 +2,8 @@ var async = require('async');
 var _ = require('underscore');
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
+var localConfig = require('./local-cli-config');
+
 
 
 var SENSOR_TYPE = 'BTLE';
@@ -43,7 +45,7 @@ if( process.argv.length < 4 || process.argv[2].toLowerCase().indexOf('help') >= 
 	hub_id = process.argv[2];
 	var region = process.argv[3];
 }
-var twoNetApi = new TwoNetAPI(config[region][env].customer_id, config[region][env].auth_key, region, env);
+var twoNetApi = new TwoNetAPI(localConfig[region][env].customer_id, localConfig[region][env].auth_key, region, env);
 
 // convenience function to add a sensor to a hub
 //

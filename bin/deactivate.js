@@ -4,6 +4,7 @@ var prompt = require('prompt');
 
 var TwoNetAPI = require('../lib/twonet');
 var config = require('../lib/config');
+var localConfig = require('./local-cli-config');
 
 function kill() {
 	console.log("\nUsage : \n");
@@ -69,7 +70,7 @@ prompt.get({
     }
 
 }, function(err, result) {
-	var twoNetApi = new TwoNetAPI(config[region][env].customer_id, config[region][env].auth_key, region, env);
+	var twoNetApi = new TwoNetAPI(localConfig[region][env].customer_id, localConfig[region][env].auth_key, region, env);
 		async.eachSeries(hub_list,function(hub_id,cb) {
 			console.log('\t'+hub_id);
 			twoNetApi.deactivateHub(hub_id, function(status, result) {

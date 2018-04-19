@@ -1,6 +1,6 @@
 node_modules/
 lib/config-ph.js
-lib/config.js
+bin/local-cli-config.js
 examples/constants-ph.js
 examples/reminders.js
 npm-debug.log
