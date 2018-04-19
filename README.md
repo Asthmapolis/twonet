@@ -31,9 +31,7 @@ An npm module that implements the Qualcomm Life 2net API. This implementation cu
 ## Running utility scripts
 The package provides several scripts for common tasks used with a fleet of hubs.
 
-Create your local config file containing your customer id and auth key
-
-Before using the CLI, create a your local config file `bin/local-cli-config.js`. Then add your customer_id and auth_key to the file like so:
+Before using the CLI, create a your local config file `bin/local-cli-config.js` and add your customer_id and auth_key like so:
 
 ```js
 module.exports = {
