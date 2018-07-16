@@ -16,6 +16,7 @@ An npm module that implements the Qualcomm Life 2net API. This implementation cu
 	getDevices()
 	createDevice()
 	registerDevice()
+	deregisterDevice()
 	associateDevice()
 	deviceCommand()
 	deviceCommandStatus()
