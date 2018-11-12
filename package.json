@@ -1,7 +1,7 @@
 {
     "name": "twonet",
     "private": false,
-    "version": "5.1.0",
+    "version": "5.1.1",
     "author": "Greg Tracy <gtracy@gmail.com> (https://propellerhealth.com/)",
     "repository": {
         "type": "git",
@@ -28,10 +28,10 @@
     "license": "MIT",
     "dependencies": {
         "async": "2.3.0",
-        "debug": "2.1.0",
+        "debug": ">=2.6.9",
         "logme": "0.3.8",
         "prompt": "^1.0.0",
-        "request": "2.61.0",
+        "request": ">=2.68.0",
         "underscore": "1.7.0",
         "xml2js": "0.4.0"
     },
