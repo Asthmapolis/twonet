@@ -2,7 +2,7 @@
   "name": "@asthmapolis/twonet",
   "version": "6.0.0",
   "description": "A Node implementation of the Qualcomm Life 2net API.",
-  "homepage": "https://github.com/asthmapolis/api-constants#readme",
+  "homepage": "https://github.com/asthmapolis/twonet#readme",
   "bugs": {
     "url": "https://asthmapolis.jira.com/issues"
   },
@@ -14,7 +14,7 @@
   "main": "lib/twonet.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:asthmapolis/api-constants.git"
+    "url": "git@github.com:asthmapolis/twonet.git"
   },
   "scripts": {
     "fmt": "prettier --write '{bin,lib,test}/**/*.js'",
