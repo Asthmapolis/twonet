@@ -1,6 +1,6 @@
 {
   "name": "@asthmapolis/twonet",
-  "version": "5.1.1",
+  "version": "6.0.0",
   "description": "A Node implementation of the Qualcomm Life 2net API.",
   "homepage": "https://github.com/asthmapolis/api-constants#readme",
   "bugs": {
