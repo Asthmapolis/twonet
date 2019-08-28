@@ -1,41 +1,121 @@
 {
-    "name": "twonet",
-    "private": false,
-    "version": "5.1.1",
-    "author": "Greg Tracy <gtracy@gmail.com> (https://propellerhealth.com/)",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/Asthmapolis/twonet.git"
-    },
-    "main": "lib/twonet.js",
-    "scripts": {
-        "help": "node bin/index.js",
-        "deactivate": "node bin/deactivate.js",
-        "find": "node bin/find-device.js",
-        "provision": "node bin/provision.js",
-        "register": "node bin/register-device.js",
-        "command": "node bin/send-command.js",
-        "status": "node bin/status.js"
-    },
-    "description": "A Node implementation of the Qualcomm Life 2net API.",
-    "keywords": [
-        "2net",
-        "hub",
-        "qualcomm",
-        "qualcomm life",
-        "digital health"
-    ],
-    "license": "MIT",
-    "dependencies": {
-        "async": "2.3.0",
-        "debug": ">=2.6.9",
-        "logme": "0.3.8",
-        "prompt": "^1.0.0",
-        "request": ">=2.68.0",
-        "underscore": "1.7.0",
-        "xml2js": "0.4.0"
-    },
-    "bugs": {
-        "url": "https://github.com/Asthmapolis/twonet/issues"
+  "name": "@asthmapolis/twonet",
+  "version": "5.1.1",
+  "description": "A Node implementation of the Qualcomm Life 2net API.",
+  "homepage": "https://github.com/asthmapolis/api-constants#readme",
+  "bugs": {
+    "url": "https://asthmapolis.jira.com/issues"
+  },
+  "license": "MIT",
+  "author": "PropellerHealth",
+  "files": [
+    "lib/**/*.js"
+  ],
+  "main": "lib/twonet.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:asthmapolis/api-constants.git"
+  },
+  "scripts": {
+    "fmt": "prettier --write '{bin,lib,test}/**/*.js'",
+    "lint": "eslint '{bin,lib,test}/**/*.js'",
+    "test": "echo not-implemented",
+    "relock": "rm -rf package-lock.json node_modules && npm install --package-lock-only && npm ci",
+    "preversion": "npm run lint && npm run test",
+    "version": "auto-changelog && git add CHANGELOG.md",
+    "postversion": "git push && git push origin v${npm_package_version}",
+    "local:help": "node bin/index.js",
+    "local:deactivate": "node bin/deactivate.js",
+    "local:find": "node bin/find-device.js",
+    "local:provision": "node bin/provision.js",
+    "local:register": "node bin/register-device.js",
+    "local:command": "node bin/send-command.js",
+    "local:status": "node bin/status.js"
+  },
+  "dependencies": {
+    "async": "2.3.0",
+    "debug": ">=2.6.9",
+    "logme": "0.3.8",
+    "prompt": "^1.0.0",
+    "request": ">=2.68.0",
+    "underscore": "1.9.1",
+    "xml2js": "0.4.0"
+  },
+  "devDependencies": {
+    "auto-changelog": "1.15.0",
+    "eslint": "6.2.2",
+    "eslint-config-prettier": "6.1.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "prettier": "1.18.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "auto-changelog": {
+    "package": "package.json",
+    "output": "CHANGELOG.md",
+    "template": "compact",
+    "unreleased": true,
+    "commitLimit": false,
+    "backfillLimit": false,
+    "sortCommits": "date",
+    "replaceText": {
+      "([A-Z]+-\\d+)": "[`$1`](https://asthmapolis.jira.com/browse/$1)"
     }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "endOfLine": "lf"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
+    "rules": {
+      "no-unused-vars": [
+        2,
+        {
+          "args": "none"
+        }
+      ],
+      "no-bitwise": 2,
+      "no-mixed-spaces-and-tabs": 2,
+      "linebreak-style": [
+        2,
+        "unix"
+      ],
+      "strict": [
+        2,
+        "global"
+      ]
+    },
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "test/**/*.js"
+        ],
+        "rules": {
+          "no-unused-vars": [
+            2,
+            {
+              "args": "none",
+              "varsIgnorePattern": "should"
+            }
+          ]
+        },
+        "env": {
+          "mocha": true
+        }
+      }
+    ]
+  }
 }

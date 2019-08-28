@@ -1,47 +1,49 @@
-var config = require('../lib/config');
-var localConfig = require('./local-cli-config');
-var TwoNetAPI = require('../lib/twonet');
+"use strict";
+
+var config = require("../lib/config");
+var localConfig = require("./local-cli-config");
+var TwoNetAPI = require("../lib/twonet");
 
 function kill() {
-	console.log("\nUsage : \n");
-	console.log("npm run find <sensor-id> <sensor-type> <region> <env>");
-	console.log("    <sensor-id> colon separated sensor ID you're searching for");
-	console.log("    <sensor-type> sensor type (usually 'BTLE')");
-    console.log("    <region> region the hub is used in");
-	console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
-	console.log("\n");
-	process.exit(0);
+  console.log("\nUsage : \n");
+  console.log("npm run find <sensor-id> <sensor-type> <region> <env>");
+  console.log("    <sensor-id> colon separated sensor ID you're searching for");
+  console.log("    <sensor-type> sensor type (usually 'BTLE')");
+  console.log("    <region> region the hub is used in");
+  console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
+  console.log("\n");
+  process.exit(0);
 }
 
-if( process.argv.length < 5 || process.argv[2].toLowerCase().indexOf('help') >= 0 ) {
-	kill();
+if (process.argv.length < 5 || process.argv[2].toLowerCase().indexOf("help") >= 0) {
+  kill();
 } else {
-	// default to production environment
-	var env = 'production';
-	if( process.argv.length === 6 ) {
-		var argv_env = process.argv[5];
-		if( argv_env === 'sandbox' ) {
-			env = 'sandbox';
-		} else if( argv_env !== 'production' ) {
-			console.log("\nHmph. I don't recognize that environment, " + argv_env);
-			kill();
-		}
-	}
-
-    if (!config.hasOwnProperty(process.argv[4])) {
-        console.log("\nHmph. I don't recognize that region, " + process.argv[4]);
-        kill();
+  // default to production environment
+  var env = "production";
+  if (process.argv.length === 6) {
+    var argv_env = process.argv[5];
+    if (argv_env === "sandbox") {
+      env = "sandbox";
+    } else if (argv_env !== "production") {
+      console.log("\nHmph. I don't recognize that environment, " + argv_env);
+      kill();
     }
+  }
 
-	var sensor_id = process.argv[2];
-	var sensor_type = process.argv[3];
-    var region = process.argv[4];
+  if (!Object.prototype.hasOwnProperty.call(config, process.argv[4])) {
+    console.log("\nHmph. I don't recognize that region, " + process.argv[4]);
+    kill();
+  }
+
+  var sensor_id = process.argv[2];
+  var sensor_type = process.argv[3];
+  var region = process.argv[4];
 }
 
 console.log("\nSearching for, " + sensor_id + "/" + sensor_type);
 
 var api = new TwoNetAPI(localConfig[region][env].customer_id, localConfig[region][env].auth_key, region, env);
 api.getDevice(sensor_id, sensor_type, function(status, result) {
-	console.log('status : ' + status);
-	console.dir(result);
+  console.log("status : " + status);
+  console.dir(result);
 });
