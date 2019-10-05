@@ -13,11 +13,14 @@ var commands = [];
 
 function kill() {
   console.log("\nUsage : \n");
-  console.log("npm run command <hub-id> <mac> <region> <env>");
+  console.log("npm run command <hub-id> <mac> <region> <env> <command>");
   console.log("    <hub-id> ID of the hub you would like to send a command to");
   console.log("    <mac> MAC of the sensor you are targeting");
   console.log("    <region> region the hub is used in");
   console.log("    <env> optional environment declaration - production/sandbox. defaults to production");
+  console.log(
+    "    <command> optional command in base64 to send to sensor. else set up the commands array in this file"
+  );
   console.log("\n");
   process.exit(0);
 }
@@ -27,14 +30,15 @@ function kill() {
 var hub_id = "fixme";
 var mac = "fixme";
 var sensor_type = "BTLE";
+var command = "fixme";
 //
 
-if (process.argv.length < 5 || process.argv[2].toLowerCase().indexOf("help") >= 0) {
+if (process.argv.length < 6 || process.argv[2].toLowerCase().indexOf("help") >= 0) {
   kill();
 } else {
   // default to production environment
   var env = "production";
-  if (process.argv.length === 6) {
+  if (process.argv.length === 7) {
     var argv_env = process.argv[5];
     if (argv_env === "sandbox") {
       env = "sandbox";
@@ -44,7 +48,7 @@ if (process.argv.length < 5 || process.argv[2].toLowerCase().indexOf("help") >= 
     }
   }
 
-  if (!Object.prototype.hasOwnProperty.call(config, process.argv[4])) {
+  if (!config.hasOwnProperty(process.argv[4])) {
     console.log("\nHmph. I don't recognize that region, " + process.argv[4]);
     kill();
   }
@@ -52,25 +56,47 @@ if (process.argv.length < 5 || process.argv[2].toLowerCase().indexOf("help") >= 
   hub_id = process.argv[2];
   mac = process.argv[3];
   var region = process.argv[4];
+  command = process.argv[6];
 }
 
 console.log("\nSending command to " + mac + "@" + hub_id + "...");
 
-var buf_size = commands.length * COMMAND_SIZE;
-var buf = new Buffer(buf_size);
-for (var k = 0; k < buf_size; k++) {
-  buf.writeUInt8(0, k);
-}
-commands.forEach(function(c, c_index) {
-  c.split(" ").forEach(function(b, i) {
-    buf.writeUInt8(parseInt(b, 16), c_index * COMMAND_SIZE + i);
+var value;
+
+if (command) {
+  value = command;
+} else {
+  var buf_size = commands.length * COMMAND_SIZE;
+  var buf = new Buffer.alloc(buf_size);
+  for (var k = 0; k < buf_size; k++) {
+    buf.writeUInt8(0, k);
+  }
+  commands.forEach(function(c, c_index) {
+    c.split(" ").forEach(function(b, i) {
+      buf.writeUInt8(parseInt(b, 16), c_index * COMMAND_SIZE + i);
+    });
   });
-});
-var value = buf.toString("base64");
+  value = buf.toString("base64");
+}
+
 console.log(value);
 
 var api = new TwoNetAPI(localConfig[region][env].customer_id, localConfig[region][env].auth_key, region, env);
 api.sendDeviceCommand(hub_id, mac, sensor_type, value, function(status, result) {
   console.log("status : " + status);
   console.dir(result);
+  if (result && result.DeviceCommandTrackingNumber && result.DeviceCommandTrackingNumber.trackingNumber) {
+    api.deviceCommandStatus(result.DeviceCommandTrackingNumber.trackingNumber[0], (status, result) => {
+      console.log("status : " + status);
+      if (
+        result &&
+        result.DeviceCommandTrackingDetails &&
+        result.DeviceCommandTrackingDetails.statusResults &&
+        result.DeviceCommandTrackingDetails.statusResults[0].statusResult &&
+        result.DeviceCommandTrackingDetails.statusResults[0].statusResult[0].status
+      ) {
+        console.dir(result.DeviceCommandTrackingDetails.statusResults[0].statusResult[0].status);
+      }
+    });
+  }
 });
