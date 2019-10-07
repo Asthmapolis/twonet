@@ -120,7 +120,7 @@ if (process.argv.length < 5 || process.argv[2].toLowerCase().indexOf("help") >= 
               } else {
                 console.log(`Failed! Results below if any: `);
                 if (Object.keys(result).length > 0) {
-                    console.dir(result);
+                  console.dir(result);
                 }
                 failures++;
               }
