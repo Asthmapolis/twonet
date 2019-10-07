@@ -48,7 +48,7 @@ if (process.argv.length < 6 || process.argv[2].toLowerCase().indexOf("help") >= 
     }
   }
 
-  if (!config.hasOwnProperty(process.argv[4])) {
+  if (!Object.keys(config).includes(process.argv[4])) {
     console.log("\nHmph. I don't recognize that region, " + process.argv[4]);
     kill();
   }
