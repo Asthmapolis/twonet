@@ -30,10 +30,12 @@
     "local:provision": "node bin/provision.js",
     "local:register": "node bin/register-device.js",
     "local:command": "node bin/send-command.js",
-    "local:status": "node bin/status.js"
+    "local:status": "node bin/status.js",
+    "local:command-bulk": "node bin/send-command-bulk.js"
   },
   "dependencies": {
     "async": "2.3.0",
+    "csv-parser": "^2.3.1",
     "debug": ">=2.6.9",
     "logme": "0.3.8",
     "prompt": "^1.0.0",
