@@ -34,7 +34,7 @@
     "local:command-bulk": "node bin/send-command-bulk.js"
   },
   "dependencies": {
-    "async": "2.3.0",
+    "async": "3.1.1",
     "csv-parser": "^2.3.1",
     "debug": ">=2.6.9",
     "logme": "0.3.8",
